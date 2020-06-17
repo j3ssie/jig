@@ -2,10 +2,11 @@ Jig - Jaeles Intput Generator
 ========
 
 This is helper tool for generated output for [Jaeles](https://github.com/jaeles-project/jaeles) Scanner.
+
 ## Install
 
 ```shell
-GO111MODULE=on go get github.com/jaeles-project/jaeles
+GO111MODULE=on go get github.com/j3ssie/jig
 ```
 
 ## Usage

@@ -98,7 +98,6 @@ func SendRequest(url string, options core.Options) {
 	if data != "" && !options.NoOutput {
 		utils.AppendToContent(options.Output, data)
 	}
-	//spew.Dump(res)
 }
 
 func GenOutput(req core.Request, res core.Response, options core.Options) string {
@@ -106,10 +105,12 @@ func GenOutput(req core.Request, res core.Response, options core.Options) string
 	switch options.OutputType {
 	case "location":
 		data["BaseURL"] = res.Location
+		if res.Location == "" {
+			data["BaseURL"] = req.URL
+		}
 	}
 	if options.Debug {
 		spew.Dump(data)
-
 	}
 	return core.ConvertToJson(data)
 }

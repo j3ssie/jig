@@ -26,14 +26,16 @@ func Execute() {
 
 func init() {
 	cobra.OnInitialize(initConfig)
-	RootCmd.PersistentFlags().IntVarP(&options.Concurrency, "concurrency", "c", 1, "Concurrency")
+	RootCmd.PersistentFlags().IntVarP(&options.Concurrency, "concurrency", "c", 5, "Concurrency")
 	RootCmd.PersistentFlags().StringVarP(&options.LogFile, "log", "l", "", "Log File")
 	RootCmd.PersistentFlags().BoolVar(&options.Debug, "debug", false, "Debug")
 	RootCmd.PersistentFlags().BoolVarP(&options.Verbose, "verobse", "v", false, "Verbose output")
 	RootCmd.PersistentFlags().BoolVarP(&options.NoOutput, "no-output", "Q", false, "Verbose output")
 	//RootCmd.PersistentFlags().BoolVarP(&options.Quite, "quite", "q", false, "Show only essential information")
 	RootCmd.PersistentFlags().BoolVarP(&options.Redirect, "redirect", "L", false, "Enable redirect")
-	RootCmd.PersistentFlags().StringSliceVarP(&options.Params, "exclude", "x", []string{}, "Exclude module name (Multiple -x flags are accepted)")
+	RootCmd.PersistentFlags().BoolVarP(&options.UseChrome, "chrome", "C", false, "Use Chrome headless to send request")
+
+	RootCmd.PersistentFlags().StringSliceVarP(&options.Params, "params", "p", []string{}, "Exclude module name (Multiple -x flags are accepted)")
 	RootCmd.PersistentFlags().StringVarP(&options.Input, "input", "i", "", "Input file")
 	RootCmd.PersistentFlags().StringVarP(&options.OutputFolder, "Output", "O", "jinp", "Output folder")
 	RootCmd.PersistentFlags().StringVarP(&options.Output, "output", "o", "out.txt", "Output File")
@@ -65,14 +67,10 @@ func HelpMessage() {
 	h += "  jig scan   --  Generate input from Content of list of URLs\n"
 	h += "  jig dirb   --  Generate input from Dirbscan result\n"
 
-	h += "\nAvailable Output Type\n\n"
-	h += `
-	  location              use Location headers as {{.BaseURL}}
-	`
+	h += "\nAvailable Output Type:\n"
+	h += `  location   --  Use Location headers as {{.BaseURL}}`
 
-	h += "\nExample commands:\n\n"
-	h += `
-	  jig scan -u https://example.com/ -I location
-	`
+	h += "\n\nExample commands:\n"
+	h += `  jig scan -u https://example.com/ -I location`
 	fmt.Println(h)
 }

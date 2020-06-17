@@ -19,6 +19,7 @@ type Options struct {
 	Quite        bool
 	Force        bool
 	Helper       bool
+	UseChrome    bool
 	Debug        bool
 	Params       []string
 }
