@@ -31,12 +31,15 @@ func init() {
 	RootCmd.PersistentFlags().BoolVar(&options.Debug, "debug", false, "Debug")
 	RootCmd.PersistentFlags().BoolVarP(&options.Verbose, "verobse", "v", false, "Verbose output")
 	RootCmd.PersistentFlags().BoolVarP(&options.NoOutput, "no-output", "Q", false, "Verbose output")
-	//RootCmd.PersistentFlags().BoolVarP(&options.Quite, "quite", "q", false, "Show only essential information")
+	RootCmd.PersistentFlags().BoolVarP(&options.Quite, "quite", "q", false, "Show only essential information")
+	// HTTP options
+	RootCmd.PersistentFlags().StringVarP(&options.Method, "method", "X", "GET", "HTTP method")
 	RootCmd.PersistentFlags().BoolVarP(&options.Redirect, "redirect", "L", false, "Enable redirect")
 	RootCmd.PersistentFlags().BoolVarP(&options.UseChrome, "chrome", "C", false, "Use Chrome headless to send request")
-
+	RootCmd.PersistentFlags().StringVar(&options.Proxy, "proxy", "", "proxy")
+	RootCmd.PersistentFlags().IntVar(&options.Timeout, "timeout", 20, "HTTP timeout")
+	// Output options
 	RootCmd.PersistentFlags().StringSliceVarP(&options.Params, "params", "p", []string{}, "Exclude module name (Multiple -x flags are accepted)")
-	RootCmd.PersistentFlags().StringVarP(&options.Input, "input", "i", "", "Input file")
 	RootCmd.PersistentFlags().StringVarP(&options.OutputFolder, "Output", "O", "jinp", "Output folder")
 	RootCmd.PersistentFlags().StringVarP(&options.Output, "output", "o", "out.txt", "Output File")
 	RootCmd.PersistentFlags().BoolVarP(&options.Helper, "list-otype", "P", false, "List all output type")

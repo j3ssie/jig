@@ -35,6 +35,13 @@ func runScan(cmd *cobra.Command, _ []string) error {
 	urlFile, _ := cmd.Flags().GetString("urls")
 	urlInput, _ := cmd.Flags().GetString("url")
 	options.OutputType, _ = cmd.Flags().GetString("otype")
+
+	if options.OutputType == "" {
+		fmt.Fprintf(os.Stderr, "[Error] Missing -I options. Please select Output type.")
+		HelpMessage()
+		os.Exit(-1)
+	}
+
 	if urlInput != "" {
 		urls = append(urls, urlInput)
 	}
@@ -78,7 +85,6 @@ func runScan(cmd *cobra.Command, _ []string) error {
 	// Submit tasks one by one.
 	for _, url := range urls {
 		wg.Add(1)
-		//job := libs.Job{URL: url, Sign: sign}
 		_ = p.Invoke(url)
 	}
 
@@ -88,13 +94,18 @@ func runScan(cmd *cobra.Command, _ []string) error {
 
 func startJob(j interface{}) {
 	job := j.(string)
-	SendRequest(job, options)
+	DoSend(job, options)
 }
 
-func SendRequest(url string, options core.Options) {
-	req, res := core.SendGET(url, options)
+func DoSend(url string, options core.Options) {
+	req, res := core.SendRequest(options.Method, url, options)
+	if res.StatusCode == 0 || res.Beautify == "" {
+		return
+	}
 	data := GenOutput(req, res, options)
+	
 	fmt.Println(data)
+
 	if data != "" && !options.NoOutput {
 		utils.AppendToContent(options.Output, data)
 	}

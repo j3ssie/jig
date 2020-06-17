@@ -8,6 +8,7 @@ type Options struct {
 	Concurrency  int
 	Retry        int
 	Redirect     bool
+	Method        string
 	Proxy        string
 	Input        string
 	Output       string

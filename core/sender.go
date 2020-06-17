@@ -25,30 +25,20 @@ func InitHeaders(options Options) []map[string]string {
 	return headers
 }
 
-// SendGET just send GET request
-func SendGET(url string, options Options) (Request, Response) {
+// SendRequest just send GET request
+func SendRequest(method string, url string, options Options) (Request, Response) {
 	req := Request{
-		Method:   "GET",
+		Method:   method,
 		URL:      url,
 		Headers:  InitHeaders(options),
 		Redirect: options.Redirect,
 	}
 
-	resp, _ := JustSend(options, req)
-	return req, resp
-}
-
-// SendPOST just send POST request
-func SendPOST(url string, options Options) (Request, Response) {
-	req := Request{
-		Method:   "POST",
-		URL:      url,
-		Headers:  InitHeaders(options),
-		Redirect: options.Redirect,
+	res, _ := JustSend(options, req)
+	if options.Verbose {
+		fmt.Printf("[Sent] %v %v %v %v %v \n", req.Method, req.URL, res.Status, res.ResponseTime, len(res.Beautify))
 	}
-
-	resp, _ := JustSend(options, req)
-	return req, resp
+	return req, res
 }
 
 // JustSend just sending request
