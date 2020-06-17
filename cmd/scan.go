@@ -103,7 +103,7 @@ func DoSend(url string, options core.Options) {
 		return
 	}
 	data := GenOutput(req, res, options)
-	
+
 	fmt.Println(data)
 
 	if data != "" && !options.NoOutput {

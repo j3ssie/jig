@@ -41,7 +41,7 @@ func init() {
 	// Output options
 	RootCmd.PersistentFlags().StringSliceVarP(&options.Params, "params", "p", []string{}, "Exclude module name (Multiple -x flags are accepted)")
 	RootCmd.PersistentFlags().StringVarP(&options.OutputFolder, "Output", "O", "jinp", "Output folder")
-	RootCmd.PersistentFlags().StringVarP(&options.Output, "output", "o", "out.txt", "Output File")
+	RootCmd.PersistentFlags().StringVarP(&options.Output, "output", "o", "jig-out.txt", "Output File")
 	RootCmd.PersistentFlags().BoolVarP(&options.Helper, "list-otype", "P", false, "List all output type")
 }
 

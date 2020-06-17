@@ -1,7 +1,6 @@
 package core
 
 import (
-	"fmt"
 	"github.com/Jeffail/gabs/v2"
 )
 
@@ -15,5 +14,5 @@ func ConvertToJson(data map[string]string) string {
 		// {"k", "v"}
 		jsonObj.Set(v, k)
 	}
-	return fmt.Sprintf(jsonObj.String())
+	return jsonObj.String()
 }
