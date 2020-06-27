@@ -1,7 +1,7 @@
-Jig - Jaeles Intput Generator
+Jig - Jaeles Input Generator
 ========
 
-This is helper tool for generated output for [Jaeles](https://github.com/jaeles-project/jaeles) Scanner.
+This is helper tool for generated inputs for [Jaeles](https://github.com/jaeles-project/jaeles) Scanner.
 
 ## Install
 
@@ -23,6 +23,8 @@ jaeles scan -s <signatures> -U jig-output.txt -J
 
 jig scan -u <url> -I location | jaeles scan -s <signatures> -J
 
+Available Output Type:
+  location   --  Use Location headers as {{.BaseURL}}
 ```
 
 ## License
